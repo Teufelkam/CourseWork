@@ -42,6 +42,7 @@ public class Patient {
     @Column(name = "address")
     String address;
 
+    @OneToMany(mappedBy="clinic")
     public void setAddress(String address) {
         this.address = address;
     }

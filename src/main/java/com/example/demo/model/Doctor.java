@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.enums.ScienceRank;
+import com.example.demo.enums.SpecializationOfDoctor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -20,14 +22,14 @@ public class Doctor {
     @Column(name = "surname")
     String surname;
 
-    @Column(name = "type")
-    String type;
+    @Enumerated(EnumType.STRING)
+    SpecializationOfDoctor type;
 
     @Column(name = "experience")
     String careerStartYear;
 
-    @Column(name = "science_rank")
-    String scienceRank;
+    @Enumerated(EnumType.STRING)
+    ScienceRank scienceRank;
 
     public void setId(Integer id) {
         this.id = id;
@@ -41,7 +43,7 @@ public class Doctor {
         this.surname = surname;
     }
 
-    public void setType(String type) {
+    public void setType(SpecializationOfDoctor type) {
         this.type = type;
     }
 
@@ -49,15 +51,15 @@ public class Doctor {
         this.careerStartYear = careerStartYear;
     }
 
-    public void setScienceRank(String scienceRank) {
+    public void setScienceRank(ScienceRank scienceRank) {
         this.scienceRank = scienceRank;
     }
 
-    public String getType() {
+    public SpecializationOfDoctor getType() {
         return type;
     }
 
-    public String getScienceRank() {
+    public ScienceRank getScienceRank() {
         return scienceRank;
     }
 
@@ -81,7 +83,7 @@ public class Doctor {
 
     public Doctor () {}
 
-    public Doctor(Integer id, String name, String surname, String type, String careerStartYear, String scienceRank) {
+    public Doctor(Integer id, String name, String surname, SpecializationOfDoctor type, String careerStartYear, ScienceRank scienceRank) {
 
         this.id = id;
         this.name = name;

@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.enums.TypeOfSurvey;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -23,8 +24,8 @@ public class HospitalSurvey {
     @JoinColumn(name = "doctor_id",insertable = false,updatable = false)
     Doctor doctor;
 
-    @Column(name = "type")
-    String type;
+    @Enumerated(EnumType.STRING)
+    TypeOfSurvey type;
     @Column(name = "date")
     String date;
     @Column(name = "description")
@@ -63,7 +64,7 @@ public class HospitalSurvey {
         return doctor;
     }
 
-    public String getType() {
+    public TypeOfSurvey getType() {
         return type;
     }
 
@@ -88,7 +89,7 @@ public class HospitalSurvey {
         this.doctor = doctor;
     }
 
-    public void setType(String type) {
+    public void setType(TypeOfSurvey type) {
         this.type = type;
     }
 
@@ -101,7 +102,7 @@ public class HospitalSurvey {
     }
 
     public HospitalSurvey () {}
-    public HospitalSurvey(Integer id, HospitalHistory hospitalHistory, Doctor doctor, String type, String date, String description) {
+    public HospitalSurvey(Integer id, HospitalHistory hospitalHistory, Doctor doctor, TypeOfSurvey type, String date, String description) {
 
         this.id = id;
         this.hospitalHistory = hospitalHistory;

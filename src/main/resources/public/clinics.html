@@ -13,7 +13,7 @@
 </head>
 
 <body ng-app="demo">
-<div ng-controller="Clinics as ctrl" id="block">
+<div ng-controller="Cabinets as ctrl" id="block">
     <div class="container-fluid">
         <div class="datagrid">
             <table>
@@ -25,7 +25,7 @@
                     <th>Назва лікарні</th>
                     <th width="65px">
                         <button type="button" class="btn-success" data-toggle="modal" data-target="#addModal"
-                                style="width: 63px">
+                                style="width: 63px" ng-click="ctrl.beforeInsert()">
                             <i class="fas fa-plus"></i>
                         </button>
                     </th>

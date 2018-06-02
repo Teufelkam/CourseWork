@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -16,10 +17,28 @@ public class Cot {
     @Column(name = "number")
     Integer number;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ward_id")
     Ward ward;
+
+    @Column(name = "ward_id",insertable = false,updatable = false)
+    Integer wardId;
+
+    public void setWardId(Integer wardId) {
+        this.wardId = wardId;
+    }
+
+    public Integer getWardId() {
+
+        return wardId;
+    }
+
+    public Cot(Integer number, Ward ward, Integer wardId) {
+        this.number = number;
+        this.ward = ward;
+        this.wardId = wardId;
+    }
 
     public void setId(Integer id) {
         this.id = id;

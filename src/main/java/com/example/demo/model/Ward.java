@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -17,12 +18,32 @@ public class Ward {
 
     @Column(name = "number")
     Integer number;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "department_id",insertable = false,updatable = false)
     Department department;
 
     @Column(name = "department_id")
     Integer departmentId;
+
+    @OneToMany(mappedBy="ward")
+    List<Cot> cots;
+
+    public List<Cot> getCots() {
+        return cots;
+    }
+
+    public void setCots(List<Cot> cots) {
+        this.cots = cots;
+    }
+
+    public Ward(Integer number, Department department, Integer departmentId, List<Cot> cots) {
+
+        this.number = number;
+        this.department = department;
+        this.departmentId = departmentId;
+        this.cots = cots;
+    }
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;

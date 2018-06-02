@@ -3,6 +3,7 @@ package com.example.demo.model;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "clinic")
@@ -27,6 +28,26 @@ public class Clinic {
     @Column(name = "address")
     String address;
 
+    @OneToMany(mappedBy="clinic")
+    List<Cabinet> cabinets;
+
+    public Clinic(Hospital hospital, Integer hospitalId, String name, String address, List<Cabinet> cabinets) {
+        this.hospital = hospital;
+        this.hospitalId = hospitalId;
+        this.name = name;
+        this.address = address;
+        this.cabinets = cabinets;
+    }
+
+    public void setCabinets(List<Cabinet> cabinets) {
+        this.cabinets = cabinets;
+    }
+
+    public List<Cabinet> getCabinets() {
+
+        return cabinets;
+    }
+
     public Clinic () {}
 
     public void setHospitalId(Integer hospitalId) {
@@ -37,19 +58,19 @@ public class Clinic {
 
         return hospitalId;
     }
-
-    public Clinic(Integer hospitalId, String name, String address) {
-        this.hospitalId = hospitalId;
-        this.name = name;
-        this.address = address;
-    }
-
-    public Clinic(Hospital hospital, Integer hospitalId, String name, String address) {
-        this.hospital = hospital;
-        this.hospitalId = hospitalId;
-        this.name = name;
-        this.address = address;
-    }
+//
+//    public Clinic(Integer hospitalId, String name, String address) {
+//        this.hospitalId = hospitalId;
+//        this.name = name;
+//        this.address = address;
+//    }
+//
+//    public Clinic(Hospital hospital, Integer hospitalId, String name, String address) {
+//        this.hospital = hospital;
+//        this.hospitalId = hospitalId;
+//        this.name = name;
+//        this.address = address;
+//    }
 
     public void setAddress(String address) {
         this.address = address;

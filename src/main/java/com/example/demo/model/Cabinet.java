@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -18,7 +19,8 @@ public class Cabinet {
     @Column(name = "number")
     Integer number;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "clinic_id",insertable = false,updatable = false)
     Clinic clinic;
 

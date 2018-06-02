@@ -25,7 +25,7 @@
                     <th>Лікарі</th>
                     <th width="65px">
                         <button type="button" class="btn-success" data-toggle="modal" data-target="#addModal"
-                                style="width: 63px">
+                                ng-click = "ctrl.beforeInsert()" style="width: 63px">
                             <i class="fas fa-plus"></i>
                         </button>
                     </th>
@@ -35,7 +35,7 @@
                 <tr ng-repeat="item in cabinets">
                     <td>{{item.id}}</td>
                     <td>{{item.number}}</td>
-                    <td>{{item.clinic.name}}</td>
+                    <td>{{'Клініка ' + item.clinicId}}</td>
                     <td>
                         <select>
                             <option ng-repeat="doctor in item.doctors">{{doctor.name}}{{' '}}{{doctor.surname}}</option>
@@ -74,9 +74,10 @@
         <br>
         <input type="text" id="CabinetNumber">
         <br>
-        Вкажіть ідентифікатор поліклініки
+        Вкажіть поліклініку:
         <br>
-        <input type="text" id="CabinetClinic">
+        <select id="Clinics">
+        </select>
 
         </div>
         <div class="modal-footer">
@@ -108,9 +109,9 @@
         <br>
         <input type="text" id="CabinetNumberUPD">
         <br>
-            Номер поліклініки
+            Назва поліклініки
         <br>
-        <input type="text" id="CabinetClinicUPD" disabled>
+        <input type="text" id="ClinicUPD" disabled>
         <br>
             <select style="width:400px" id="doctorUPD" name="doctors[]" class="selectionsUPD" multiple="multiple">
             </select>

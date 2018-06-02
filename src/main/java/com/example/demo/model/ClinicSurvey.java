@@ -3,6 +3,7 @@ package com.example.demo.model;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -23,7 +24,7 @@ public class ClinicSurvey {
     @Column(name = "type")
     String type;
     @Column(name = "date")
-    String date;
+    LocalDate date;
     @Column(name = "description")
     String description;
     @Column(name = "clinics_history_id")
@@ -64,7 +65,7 @@ public class ClinicSurvey {
         this.type = type;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -89,7 +90,7 @@ public class ClinicSurvey {
         return type;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -98,7 +99,7 @@ public class ClinicSurvey {
     }
 
     public ClinicSurvey () {}
-    public ClinicSurvey(Integer id, ClinicHistory clinicHistory, Doctor doctor, String type, String date, String description) {
+    public ClinicSurvey(Integer id, ClinicHistory clinicHistory, Doctor doctor, String type, LocalDate date, String description) {
 
         this.id = id;
         this.clinicHistory = clinicHistory;

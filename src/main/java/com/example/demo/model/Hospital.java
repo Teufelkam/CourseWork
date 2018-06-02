@@ -23,6 +23,23 @@ public class Hospital {
     @Column(name= "address")
     private String address;
 
+    @OneToMany(mappedBy="hospital")
+    List<Corp> corps;
+
+    public void setCorps(List<Corp> corps) {
+        this.corps = corps;
+    }
+
+    public List<Corp> getCorps() {
+        return corps;
+    }
+
+    public Hospital(String name, String address, List<Corp> corps) {
+        this.name = name;
+        this.address = address;
+        this.corps = corps;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

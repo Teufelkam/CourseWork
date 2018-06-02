@@ -8,16 +8,43 @@ app.controller('Cabinets',function ($http,$scope) {
         //  console.log(response);
     });
 
+    $http.get('/clinics/get').then(function (response) {
+        var clinics = response.data;
+        var selector = document.getElementById("Clinics");
+        $(selector).empty();
+        for (var i = 0; i < clinics.length; i++) {
+            var option = document.createElement("option");
+            option.text = clinics[i].name;
+            option.value = clinics[i].id;
+            selector.add(option);
+        }
+    });
+    this.beforeInsert = function adr() {
+        console.log('fsddfsdfsfdsdf');
+        $http.get('/clinics/get').then(function (response) {
+            var clinics = response.data;
+            var selector = document.getElementById("Clinics");
+            $(selector).empty();
+            for (var i = 0; i < clinics.length; i++) {
+                var option = document.createElement("option");
+                option.text = clinics[i].name;
+                option.value = clinics[i].id;
+                selector.add(option);
+            }
+        });
+    };
+
     this.insertCabinet = function add() {
         var cabinetNumber = document.getElementById("CabinetNumber").value;
-        var cabinetClinic = document.getElementById("CabinetClinic").value;
+        var index = document.getElementById("Clinics").selectedIndex;
+        var clinic_id = document.getElementById("Clinics").options[index].value;
 
         var req = {
             method: 'POST',
             url: '/cabinets/insert',
             data: {
                 number: cabinetNumber,
-                clinic_id: cabinetClinic
+                clinic_id: clinic_id
             }
         };
         console.log(req);
@@ -46,21 +73,21 @@ app.controller('Cabinets',function ($http,$scope) {
         });
        document.getElementById("CabinetIdUPD").value = id;
        document.getElementById("CabinetNumberUPD").value = cabinetNumber;
-       document.getElementById("CabinetClinicUPD").value = cabinetClinic;
+       console.log(cabinetClinic);
+       document.getElementById("ClinicUPD").value = cabinetClinic;
        clinic_id = clinicId;
     };
 
     this.updateCabinet = function update() {
         var id = document.getElementById("CabinetIdUPD").value;
         var cabinetNumber = document.getElementById("CabinetNumberUPD").value;
-        
+
         var req = {
             method: 'POST',
             url: '/cabinets/update?id=' + id,
             data: {
                 number: cabinetNumber,
                 clinic_id: clinic_id,
-
             }
         };
         console.log(req);

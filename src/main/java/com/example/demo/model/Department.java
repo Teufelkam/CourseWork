@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.enums.TypeOfDepartment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -14,16 +16,36 @@ public class Department {
     @Column(name = "id")
     Integer id;
 
-    @Column(name = "type")
-    String type;
+    @Enumerated(EnumType.STRING)
+    TypeOfDepartment type;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "corps_id",insertable = false,updatable = false)
     Corp corps;
 
     @Column(name = "corps_id")
     Integer corpsId;
+
+    @OneToMany(mappedBy="department")
+    List<Ward> wards;
+
+    public void setWards(List<Ward> wards) {
+        this.wards = wards;
+    }
+
+    public List<Ward> getWards() {
+
+        return wards;
+    }
+
+    public Department(TypeOfDepartment type, Corp corps, Integer corpsId, List<Ward> wards) {
+
+        this.type = type;
+        this.corps = corps;
+        this.corpsId = corpsId;
+        this.wards = wards;
+    }
 
     public void setCorpsId(Integer corpsId) {
         this.corpsId = corpsId;
@@ -34,12 +56,12 @@ public class Department {
         return corpsId;
     }
 
-    public Department(String type, Integer corpsId) {
+    public Department(TypeOfDepartment type, Integer corpsId) {
         this.type = type;
         this.corpsId = corpsId;
     }
 
-    public Department(String type, Corp corps, Integer corpsId) {
+    public Department(TypeOfDepartment type, Corp corps, Integer corpsId) {
         this.type = type;
         this.corps = corps;
         this.corpsId = corpsId;
@@ -49,7 +71,7 @@ public class Department {
         this.id = id;
     }
 
-    public void setType(String type) {
+    public void setType(TypeOfDepartment type) {
         this.type = type;
     }
 
@@ -62,7 +84,7 @@ public class Department {
         return id;
     }
 
-    public String getType() {
+    public TypeOfDepartment getType() {
         return type;
     }
 
