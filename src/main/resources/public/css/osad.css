@@ -44,6 +44,7 @@ body {
     border-left: 1px solid #1fa129;
     font-size: 15px;
     font-weight: normal;
+    overflow:hidden;white-space:nowrap;
 }
 
 
@@ -53,9 +54,10 @@ body {
     color: #0f0f0f;
 }
 
-.datagrid table tbody td:first-child {
-    border-left: none;
-}
+
+table { width:250px;table-layout:fixed;margin: auto; }
+table tr { height:1em;  }
+td { overflow:hidden;white-space:nowrap;  }
 
 .datagrid table tbody tr:last-child td {
     border-bottom: none;
